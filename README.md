@@ -9,5 +9,5 @@ export PATH=$PATH:/usr/local/nginx/sbin
 
 
 #### the grant of mysql
-  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
-  FLUSH   PRIVILEGES;
+    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+    FLUSH   PRIVILEGES;
