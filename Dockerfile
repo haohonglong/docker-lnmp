@@ -1,6 +1,6 @@
 ARG OS_VER=latest
 
-FROM registry.cn-hangzhou.aliyuncs.com/liufee/feehi:$OS_VER
+FROM liufee/lnmp:$OS_VER
 MAINTAINER lam github.com/haohonglong/lam2
 
 #install xdebug
