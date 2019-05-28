@@ -8,6 +8,6 @@ docker run -h lam -p 80:80 -p 8080:8080 -p 9001:9001 -p 3306:3306 -p 6379:6379 -
 export PATH=$PATH:/usr/local/nginx/sbin
 
 
-# the grant of mysql
-    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
-    FLUSH   PRIVILEGES;
+#### the grant of mysql
+  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+  FLUSH   PRIVILEGES;
