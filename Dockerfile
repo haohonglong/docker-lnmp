@@ -15,7 +15,11 @@ RUN cd /usr/src \
     && make \
     && cp modules/xdebug.so /usr/local/php/lib/php/extensions/no-debug-zts-20170718 \
     && echo "zend_extension = /usr/local/php/lib/php/extensions/no-debug-zts-20170718/xdebug.so" >> /etc/php/php.ini \
+    && echo "[XDebug]" >> /etc/php/php.ini \
+    && echo "xdebug.remote_enable = 1" >> /etc/php/php.ini \
+    && echo "xdebug.remote_autostart = 0" >> /etc/php/php.ini \
     && echo "xdebug.remote_port = 9001" >> /etc/php/php.ini \
+    && echo "xdebug.remote_log = /var/log/xdebug_remote.log" >> /etc/php/php.ini \
     && rm -rf /usr/src/xdebug
 
 
