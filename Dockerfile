@@ -1,6 +1,6 @@
 ARG OS_VER=latest
 
-FROM liufee/lnmp:$OS_VER
+FROM registry.cn-hangzhou.aliyuncs.com/liufee/feehi:$OS_VER
 MAINTAINER lam github.com/haohonglong/lam2
 
 #install xdebug
@@ -17,8 +17,9 @@ RUN cd /usr/src \
     && echo "zend_extension = /usr/local/php/lib/php/extensions/no-debug-zts-20170718/xdebug.so" >> /etc/php/php.ini \
     && echo "[XDebug]" >> /etc/php/php.ini \
     && echo "xdebug.remote_enable = 1" >> /etc/php/php.ini \
-    && echo "xdebug.remote_autostart = 0" >> /etc/php/php.ini \
+    && echo "xdebug.remote_autostart = 1" >> /etc/php/php.ini \
     && echo "xdebug.remote_port = 9001" >> /etc/php/php.ini \
+    && echo "xdebug.remote_host = 127.0.0.1" >> /etc/php/php.ini \
     && echo "xdebug.remote_log = /var/log/xdebug_remote.log" >> /etc/php/php.ini \
     && rm -rf /usr/src/xdebug
 
@@ -26,7 +27,7 @@ RUN cd /usr/src \
  RUN ln -s /usr/local/nginx/html /www
 
 
-EXPOSE 8080 9001 9002
+EXPOSE 8080 9001
 
 
 
