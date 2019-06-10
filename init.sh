@@ -1,13 +1,17 @@
 #!/bin/bash
+# $1 container_id
+# $2 image_id
+if [ $1 ]; then 
+    docker stop $1 && docker rm $1 
+fi  
 
-containerid=$1
-imageid=$2
-echo $containerid
-echo $imageid
-docker stop $containerid && docker rm $containerid && docker rmi $imageid && docker build -t haohonglong/lnmp:1.0 .
+if [ $2 ]; then
+    docker rmi $2
+fi  
 
-  docker run -h lam -p 80:80 -p 8080:8080 -p 9001:9001 -p 3306:3306 -p 6379:6379 -p 27017:27017 --name lnmp -d \
-  -v /usr/local/var/nginx:/etc/nginx \
-  -v /usr/local/var/mysql:/data/mysql \
-  -v /usr/local/var/log:/var/log \
-  -v /Users/long/sites:/usr/local/nginx/html haohonglong/lnmp:1.0
+docker build -t haohonglong/lnmp:1.0 .
+docker run -h lam -p 80:80 -p 8080:8080 -p 3306:3306 -p 6379:6379 -p 27017:27017 --name lnmp -d \
+-v /usr/local/var/nginx:/etc/nginx \
+-v /usr/local/var/mysql:/data/mysql \
+-v /usr/local/var/log:/var/log \
+-v /Users/long/sites:/usr/local/nginx/html haohonglong/lnmp:1.0
