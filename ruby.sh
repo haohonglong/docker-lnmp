@@ -5,7 +5,7 @@ suffix=$2
 suffix=${suffix:-'tar.gz'}
 mkdir /ruby
 cd /ruby
-wget https://cache.ruby-lang.org/pub/ruby/2.6/${name}.${suffix}
+curl -o ${name}.${suffix} https://cache.ruby-lang.org/pub/ruby/2.6/${name}.${suffix}
 if [ -e ${name}.${suffix} ];then
     tar -xvzf ${name}.${suffix}
     cd ${name} 
