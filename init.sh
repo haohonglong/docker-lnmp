@@ -7,9 +7,9 @@ fi
 
 if [ $2 ]; then
     docker rmi $2
+    docker build -t haohonglong/lnmp:1.0 .
 fi  
 
-docker build -t haohonglong/lnmp:1.0 .
 docker run -h lam -p 80:80 -p 8080:8080 -p 3306:3306 -p 6379:6379 -p 27017:27017 --name lnmp -d \
 -v /usr/local/var/nginx:/etc/nginx \
 -v /usr/local/var/mysql:/data/mysql \
