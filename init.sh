@@ -14,4 +14,5 @@ docker run -h lam -p 80:80 -p 8080:8080 -p 3306:3306 -p 6379:6379 -p 27017:27017
 -v /usr/local/var/nginx:/etc/nginx \
 -v /usr/local/var/mysql:/data/mysql \
 -v /usr/local/var/log:/var/log \
+-v /usr/local/var/mongodb:/data/mongodb \
 -v /Users/long/sites:/usr/local/nginx/html haohonglong/lnmp:1.0

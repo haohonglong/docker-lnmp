@@ -15,7 +15,7 @@ if [ -e ${name}.${suffix} ];then
     cd /
     rm -rf /ruby 
     gem install rails
-    rails --version
+    rails -v
 else
     echo nothing
 fi 

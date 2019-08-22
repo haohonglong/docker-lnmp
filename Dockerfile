@@ -5,6 +5,8 @@ MAINTAINER lam github.com/haohonglong/lam2
 
 COPY ./ruby.sh /
 
+RUN yum install clang
+
 #install xdebug
 RUN cd /usr/src \
     && mkdir xdebug \
