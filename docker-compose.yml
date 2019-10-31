@@ -1,0 +1,24 @@
+version: '2'
+services:
+  lnp:
+    image: haohonglong/lnmp:1.1
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "27017:27017"
+    depends_on:
+       - "mysql57"
+    volumes:
+      - "/Users/long/sites:/usr/local/nginx/html"
+      - "/usr/local/var/nginx:/etc/nginx"
+      - "/usr/local/var/log:/var/log"
+      - "/usr/local/var/mongodb:/data/db"
+  mysql57:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - "/usr/local/var/mysql:/var/lib/mysql"
+    
