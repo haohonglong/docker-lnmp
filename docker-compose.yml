@@ -7,13 +7,13 @@ services:
       - "8080:8080"
       - "27017:27017"
     depends_on:
-       - "mysql57"
+       - "mysql"
     volumes:
       - "/Users/long/sites:/usr/local/nginx/html"
       - "/usr/local/var/nginx:/etc/nginx"
       - "/usr/local/var/log:/var/log"
       - "/usr/local/var/mongodb:/data/db"
-  mysql57:
+  mysql:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: 123456
