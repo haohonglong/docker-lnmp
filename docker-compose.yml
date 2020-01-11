@@ -4,15 +4,15 @@ services:
     image: haohonglong/lnmp:1.1
     ports:
       - "80:80"
-      - "8080:8080"
+      - "8083:8080"
       - "27017:27017"
     depends_on:
        - "mysql"
     volumes:
       - "/Users/long/sites:/usr/local/nginx/html"
       - "/usr/local/var/nginx:/etc/nginx"
-      - "/usr/local/var/log:/var/log"
-      - "/usr/local/var/mongodb:/data/db"
+      - "./data/log:/var/log"
+      - "./data/mongodb:/data/db"
   mysql:
     image: mysql:5.7
     environment:
@@ -21,4 +21,15 @@ services:
       - "3306:3306"
     volumes:
       - "/usr/local/var/mysql:/var/lib/mysql"
+  phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        ports:
+            - "8080:80"
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_HOST=mysql
+        restart: always
+        depends_on:
+            - mysql  
     
