@@ -1,7 +1,12 @@
-version: '2'
+version: "2"
 services:
   lnp:
-    image: haohonglong/lnmp:1.1
+    image: "haohonglong/lnmp:1.2"
+    build:
+          context: "."
+          args:
+              - PHP_VER=7.2.8
+    container_name: "lnp"
     ports:
       - "80:80"
       - "8080:8080"
@@ -9,16 +14,33 @@ services:
     depends_on:
        - "mysql"
     volumes:
-      - "/Users/long/sites:/usr/local/nginx/html"
-      - "/usr/local/var/nginx:/etc/nginx"
-      - "/usr/local/var/log:/var/log"
-      - "/usr/local/var/mongodb:/data/db"
+      - "./www:/usr/local/nginx/html"
+      - "./etc/nginx:/etc/nginx"
+      - "./data/log:/var/log"
+      - "./data/mongodb:/data/db"
   mysql:
-    image: mysql:5.7
+    image: "mysql:5.7"
+    container_name: "mysql"
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: "123456"
     ports:
       - "3306:3306"
     volumes:
-      - "/usr/local/var/mysql:/var/lib/mysql"
+      - "./data/mysql:/var/lib/mysql"
+  phpmyadmin:
+        image: "phpmyadmin/phpmyadmin"
+        container_name: "phpmyadmin"
+        ports:
+            - "8080:80"
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_HOST=mysql
+        restart: always
+        depends_on:
+            - mysql  
+
+
+networks:
+  public:
+      driver: "bridge"
     
