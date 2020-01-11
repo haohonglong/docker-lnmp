@@ -11,9 +11,6 @@ services:
        - "mysql"
     volumes:
       - "./www:/usr/local/nginx/html"
-      - "./etc/nginx:/etc/nginx"
-      - "./data/log:/var/log"
-      - "./data/mongodb:/data/db"
   mysql:
     image: mysql:5.7
     container_name: mysql

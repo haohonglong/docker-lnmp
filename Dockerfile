@@ -9,8 +9,6 @@ MAINTAINER lam github.com/haohonglong/docker-lnmp
 ARG ROOT_PASSWORD=123456
 #php版本,因为php版本间配置文件模板不相同，此处的版本号只能为大于7.0以上版本
 ARG PHP_VER=7.2.8
-#nginx版本
-ARG NGINX_VER=1.15.2
 #xhprof版本
 ARG XHPROF_VER=1.2
 #swoole版本
@@ -97,6 +95,7 @@ RUN cd /usr/src \
     && sed -i "s/dirname(__FILE__) . '\/..\/xhprof_lib'/'xhprof_lib'/" /var/tools/xhprof_html/typeahead.php \
     && rm -rf /usr/src/xhprof-${XHPROF_VER} && rm -rf /usr/src/xhprof.tar.gz
 
+#安装xdebug
 RUN cd /usr/src \
     && mkdir xdebug \
     && cd xdebug \
