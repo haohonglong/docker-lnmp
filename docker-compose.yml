@@ -10,8 +10,8 @@ services:
     depends_on:
        - "mysql"
     volumes:
-      - "/Users/long/sites:/usr/local/nginx/html"
-      - "/usr/local/var/nginx:/etc/nginx"
+      - "./www:/usr/local/nginx/html"
+      - "./etc/nginx:/etc/nginx"
       - "./data/log:/var/log"
       - "./data/mongodb:/data/db"
   mysql:
@@ -22,7 +22,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - "/usr/local/var/mysql:/var/lib/mysql"
+      - "./data/mysql:/var/lib/mysql"
   phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
