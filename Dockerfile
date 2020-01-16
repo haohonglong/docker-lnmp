@@ -1,4 +1,4 @@
-ARG OS_VER=latest
+ARG OS_VER=7
 
 
 FROM centos:$OS_VER
