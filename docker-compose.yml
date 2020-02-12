@@ -1,7 +1,7 @@
 version: "2"
 services:
   lnp:
-    image: "haohonglong/lnmp:1.2"
+    image: "haohonglong/lnp:1.0"
     build:
           context: "."
           args:
