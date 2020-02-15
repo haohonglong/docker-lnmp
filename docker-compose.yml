@@ -8,12 +8,15 @@ services:
       - "8083:8080"
       - "27017:27017"
     depends_on:
-       - "mysql"
+      - "mysql"
     volumes:
+      - "./etc/php:/etc/php"
       - "./www:/usr/local/nginx/html"
       - "./etc/nginx:/etc/nginx"
       - "./data/log:/var/log"
       - "./data/mongodb:/data/db"
+    networks:
+      - public
   mysql:
     image: mysql:5.7
     container_name: mysql
@@ -23,6 +26,8 @@ services:
       - "3306:3306"
     volumes:
       - "./data/mysql:/var/lib/mysql"
+    networks:
+      - public
   phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
@@ -32,6 +37,26 @@ services:
             - PMA_ARBITRARY=1
             - PMA_HOST=mysql
         restart: always
+        networks:
+          - public
         depends_on:
             - mysql  
+  node:
+    image: haohong/node:1.0
+    container_name: node3
+    ports:
+      - 9527:9527
+      - 3000:3000
+      - 9528:9528
+    volumes:
+      - ./app:/www
+    working_dir: /www
+    networks:
+      - public
+    command: top
+    tty: true
+
+networks:
+  public:
+    driver: bridge
     
