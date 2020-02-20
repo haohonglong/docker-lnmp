@@ -42,7 +42,7 @@ services:
         depends_on:
             - mysql  
   node:
-    image: haohong/node:1.0
+    image: haohonglong/node:1.0
     container_name: node3
     ports:
       - 9527:9527
