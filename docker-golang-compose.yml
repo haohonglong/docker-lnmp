@@ -1,0 +1,43 @@
+version: '2'
+services:
+  golang:
+    image: golang
+    container_name: golang
+    command: ["bash"]
+    tty: true
+    ports:
+      - "6060:6060"
+      - "9301:2001"
+      - "9300:2000"
+    depends_on:
+      - "redis"
+    volumes:
+      - "./go:/go"
+    networks:
+      - public
+  redis:
+    image: redis:4.0
+    container_name: redis
+    restart: always
+    environment:
+        REDIS_PASS_FILE: /run/secrets/redis-password
+    command: [
+      "bash", "-c",
+      '
+       docker-entrypoint.sh
+       --requirepass "$$(cat $$REDIS_PASS_FILE)"
+      '
+    ]
+    volumes:
+      - ./data/redis/etc/redis.conf:/usr/local/etc/redis/redis.conf 
+      - ./data/redis/data:/data 
+      - ./data/redis/etc/redis-password:/run/secrets/redis-password 
+    networks:
+      - public
+    ports:
+      - "6397:6379"
+
+networks:
+  public:
+    driver: bridge
+    
