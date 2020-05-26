@@ -1,8 +1,9 @@
 version: '2'
 services:
   golang:
-    image: golang
+    image: golang:1.10
     container_name: golang
+    restart: always
     command: ["bash"]
     tty: true
     ports:
@@ -13,6 +14,7 @@ services:
       - "redis"
     volumes:
       - "./go:/go"
+    #command: "GOPATH=/www/go"
     networks:
       - public
   redis:
