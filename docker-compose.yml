@@ -3,6 +3,7 @@ services:
   lnp:
     image: haohonglong/lnmp:1.1
     container_name: lnp
+    restart: always
     ports:
       - "80:80"
       - "8083:8080"
@@ -15,46 +16,81 @@ services:
       - "./etc/nginx:/etc/nginx"
       - "./data/log:/var/log"
       - "./data/mongodb:/data/db"
+    working_dir: /www
     networks:
       - public
   mysql:
     image: mysql:5.7
     container_name: mysql
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     ports:
       - "3306:3306"
     volumes:
       - "./data/mysql:/var/lib/mysql"
+      - "./var/log/mysql/:/var/log/mysql"
     networks:
       - public
   phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        container_name: phpmyadmin
-        ports:
-            - "8080:80"
-        environment:
-            - PMA_ARBITRARY=1
-            - PMA_HOST=mysql
-        restart: always
-        networks:
-          - public
-        depends_on:
-            - mysql  
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    depends_on:
+      - mysql
+    ports:
+      - "8080:80"
+    volumes:
+      - "./www/phpmyadmin:/var/www/html"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+    restart: always
+    networks:
+      - public 
   node:
     image: haohonglong/node:1.0
-    container_name: node3
+    container_name: node
     ports:
       - 9527:9527
-      - 3000:3000
+      - 3001:3000
+      - 3002:3002
       - 9528:9528
+    depends_on:
+      - "mysql"
+    #links:
+      #- "mysql"
     volumes:
-      - ./app:/www
-    working_dir: /www
+      - ./app:/app
+      #- ./bin:/usr/local/lib/node
+    working_dir: /app
     networks:
       - public
-    command: top
+    command: bash
     tty: true
+
+  redis:
+    image: redis:4.0
+    container_name: redis
+    restart: always
+    environment:
+        REDIS_PASS_FILE: /run/secrets/redis-password
+    command: [
+      "bash", "-c",
+      '
+       docker-entrypoint.sh
+       --requirepass "$$(cat $$REDIS_PASS_FILE)"
+      '
+    ]
+    volumes:
+      - ./data/redis/etc/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/data:/data
+      - ./data/redis/etc/redis-password:/run/secrets/redis-password
+    networks:
+      - public
+    ports:
+      - "6397:6379"
+
+
 
 networks:
   public:
