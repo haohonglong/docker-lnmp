@@ -1,0 +1,28 @@
+version: '2'
+services: 
+  redis:
+    image: redis:4.0
+    container_name: redis
+    restart: always
+    environment:
+        REDIS_PASS_FILE: /run/secrets/redis-password
+    command: [
+      "bash", "-c",
+      '
+       docker-entrypoint.sh
+       --requirepass "$$(cat $$REDIS_PASS_FILE)"
+      '
+    ]
+    volumes:
+      - ./data/redis/etc/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/data:/data
+      - ./data/redis/etc/redis-password:/run/secrets/redis-password
+    networks:
+      - public
+    ports:
+      - "6397:6379"
+
+networks:
+  public:
+    driver: bridge
+    
