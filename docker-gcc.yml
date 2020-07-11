@@ -6,7 +6,7 @@ services:
     command: ["bash"]
     tty: true
     volumes:
-      - "./www/exercise_of_c:/app"
+      - "./c/exercise_of_c:/app"
     working_dir: /app
     networks:
       - public
