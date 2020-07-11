@@ -1,0 +1,17 @@
+version: '2'
+services:
+  gcc:
+    image: gcc:4.9
+    container_name: gcc
+    command: ["bash"]
+    tty: true
+    volumes:
+      - "./www/exercise_of_c:/app"
+    working_dir: /app
+    networks:
+      - public
+
+networks:
+  public:
+    driver: bridge
+    
