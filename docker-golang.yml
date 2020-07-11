@@ -1,0 +1,23 @@
+version: '2'
+services:
+  golang:
+    image: golang:1.10
+    container_name: golang
+    restart: always
+    command: ["bash"]
+    tty: true
+    ports:
+      - "6060:6060"
+      - "9301:2001"
+      - "9300:2000"
+   
+    volumes:
+      - "./go:/go"
+    #command: "GOPATH=/www/go"
+    networks:
+      - public
+
+networks:
+  public:
+    driver: bridge
+    
