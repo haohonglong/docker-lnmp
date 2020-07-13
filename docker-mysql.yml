@@ -9,7 +9,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./data/mysql/data/db:/var/lib/mysql #数据文件挂载
+      - ./data/mysql:/var/lib/mysql #数据文件挂载
       - ./etc/mysql/conf.d:/etc/mysql/conf.d #配置文件挂载
       - ./var/log/mysql:/var/log/mysql #日志文件挂载
     networks:
