@@ -3,19 +3,18 @@ services:
   node:
     image: haohonglong/node:1.0
     container_name: node
+    restart: always
     ports:
+      - 8000:8000
+      - 8001:8001
       - 9527:9527
-      - 3001:3000
-      - 3002:3002
-      - 9528:9528
-    depends_on:
-      - "mysql"
-    #links:
-      #- "mysql"
+      - 3000:3000
     volumes:
       - ./app:/app
-      #- ./bin:/usr/local/lib/node
     working_dir: /app
+    extra_hosts:
+       - "yaf.local:172.21.0.4"
+       - "boda.api:192.168.0.104"
     networks:
       - public
     command: bash
