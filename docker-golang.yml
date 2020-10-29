@@ -3,7 +3,8 @@ services:
   golang:
     image: golang:1.10
     container_name: golang
-    restart: always
+    environment:
+      - TZ=Asia/Shanghai
     command: ["bash"]
     tty: true
     ports:
