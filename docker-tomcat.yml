@@ -1,23 +1,21 @@
 version: '2'
 services:
-  baota:
-    image: pch18/baota
-    container_name: baota
+  tomcat:
+    image: tomcat:9.0
+    container_name: tomcat
     environment:
       - TZ=Asia/Shanghai
     restart: always
-    privileged: true
-    shm_size: '1gb'
     ports:
-      - "8888:8888"
-      - "888:888"
+      - "8888:8080"
     volumes:
-      - "./baota/wwwroot:/www/wwwroot"
+      - "./tomcat/webapps:/usr/local/tomcat/webapps"
+      - "./tomcat/logs:/usr/local/tomcat/logs"
     networks:
       - public
-
-
+ 
 networks:
   public:
     driver: bridge
     
+

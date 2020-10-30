@@ -3,6 +3,8 @@ services:
   gcc:
     image: gcc:4.9
     container_name: gcc
+    environment:
+      - TZ=Asia/Shanghai
     command: ["bash"]
     tty: true
     volumes:

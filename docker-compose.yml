@@ -3,6 +3,8 @@ services:
   lnp:
     image: haohonglong/lnmp:1.1
     container_name: lnp
+    environment:
+      - TZ=Asia/Shanghai
     restart: always
     ports:
       - "80:80"
@@ -24,7 +26,8 @@ services:
     container_name: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+      - MYSQL_ROOT_PASSWORD=123456
+      - TZ=Asia/Shanghai
     ports:
       - "3306:3306"
     volumes:
@@ -45,12 +48,15 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=mysql
+      - TZ=Asia/Shanghai
     restart: always
     networks:
       - public 
   node:
     image: haohonglong/node:1.0
     container_name: node
+    environment:
+      - TZ=Asia/Shanghai
     ports:
       - 9527:9527
       - 3001:3000
@@ -74,7 +80,8 @@ services:
     container_name: redis
     restart: always
     environment:
-        REDIS_PASS_FILE: /run/secrets/redis-password
+      - REDIS_PASS_FILE=/run/secrets/redis-password
+      - TZ=Asia/Shanghai
     command: [
       "bash", "-c",
       '

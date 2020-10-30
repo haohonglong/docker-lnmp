@@ -5,7 +5,8 @@ services:
     container_name: redis
     restart: always
     environment:
-        REDIS_PASS_FILE: /run/secrets/redis-password
+      - REDIS_PASS_FILE=/run/secrets/redis-password
+      - TZ=Asia/Shanghai
     command: [
       "bash", "-c",
       '

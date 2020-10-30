@@ -10,6 +10,7 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=mysql
+      - TZ=Asia/Shanghai
     restart: always
     networks:
       - public 

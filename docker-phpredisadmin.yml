@@ -3,13 +3,14 @@ services:
   phpredisadmin:
     image: erikdubbelboer/phpredisadmin
     container_name: phpredisadmin
-    restart: always
     environment:
       - ADMIN_USER=admin
       - ADMIN_PASS=123456
       - REDIS_1_AUTH=123456
       - REDIS_1_HOST=redis
       - REDIS_1_PORT=6379
+      - TZ=Asia/Shanghai
+    restart: always
     ports:
       - "8086:80"
     networks:

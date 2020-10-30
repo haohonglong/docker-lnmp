@@ -1,0 +1,20 @@
+version: '2'
+services:
+  jdk8:
+    image: codenvy/jdk8_maven3_tomcat8:latest
+    container_name: jdk8
+    environment:
+      - TZ=Asia/Shanghai
+    restart: always
+    ports:
+      - "8001:8000"
+      - "8088:8080"
+      - "4200:4200"
+    networks:
+      - public
+ 
+networks:
+  public:
+    driver: bridge
+    
+
