@@ -1,15 +1,63 @@
 version: '2'
 services:
-  node:
+  node1:
     image: haohonglong/node:1.0
-    container_name: node
+    container_name: node1
     environment:
       - TZ=Asia/Shanghai
     ports:
       - 8001:8001
-      - 8002:8002
-      - 8003:8003
-      - 8004:8004
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    extra_hosts:
+      - "yaf.local:192.168.0.105"
+      - "boda.api:192.168.0.105"
+    networks:
+      - public
+    command: bash
+    tty: true
+  node2:
+    image: haohonglong/node:1.0
+    container_name: node2
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 8002:8001
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    extra_hosts:
+      - "yaf.local:192.168.0.105"
+      - "boda.api:192.168.0.105"
+    networks:
+      - public
+    command: bash
+    tty: true
+  node3:
+    image: haohonglong/node:1.0
+    container_name: node3
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 8003:8001
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    extra_hosts:
+      - "yaf.local:192.168.0.105"
+      - "boda.api:192.168.0.105"
+    networks:
+      - public
+    command: bash
+    tty: true
+  node4:
+    image: haohonglong/node:1.0
+    container_name: node4
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 8004:8001
     volumes:
       - ./app:/app
     working_dir: /app
