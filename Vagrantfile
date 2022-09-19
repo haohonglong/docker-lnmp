@@ -47,9 +47,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder "./data", "/vagrant_data", create: true
   config.vm.synced_folder "/Users/long/sites", "/www"
-  config.vm.synced_folder "~/.m2/repository", "/home/docker/docker-java/maven/repository"
-  config.vm.synced_folder "/Users/long/Docker/docker-java/app", "/home/docker/docker-java/app"
-  config.vm.synced_folder "/Users/long/Docker/docker-java/tomcat/webapps", "/home/docker/docker-java/tomcat/webapps"
+  config.vm.synced_folder "~/.m2/repository", "/home/vagrant/docker/docker-java/maven/repository"
+  config.vm.synced_folder "~/projects/java/app/", "/home/vagrant/docker/docker-java/app"
+  config.vm.synced_folder "~/projects/tomcat/webapps", "/home/vagrant/docker/docker-java/tomcat/webapps"
+  config.vm.synced_folder "~/projects/node/app", "/home/vagrant/docker/dnmp/node/app"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -61,7 +62,7 @@ Vagrant.configure("2") do |config|
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
+      vb.memory = "2046"
    end
   #
   # View the documentation for the provider you are using for more
@@ -70,7 +71,8 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
-   config.vm.provision "shell", inline: <<-SHELL
+  config.vm.provision "shell", inline: <<-SHELL
       sudo systemctl start docker
-   SHELL
+      docker start node1
+  SHELL
 end
