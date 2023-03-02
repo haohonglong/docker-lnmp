@@ -47,9 +47,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder "./data", "/vagrant_data", create: true
   config.vm.synced_folder "/Users/long/sites", "/www"
-  config.vm.synced_folder "~/.m2/repository", "/home/vagrant/docker/docker-java/maven/repository"
+  config.vm.synced_folder "~/.m2/repository", "/home/vagrant/.m2/repository"
   config.vm.synced_folder "~/projects/java/app/", "/home/vagrant/docker/docker-java/app"
-  config.vm.synced_folder "~/projects/tomcat/webapps", "/home/vagrant/docker/docker-java/tomcat/webapps"
+  config.vm.synced_folder "~/projects/tomcat", "/home/vagrant/docker/docker-java/tomcat"
   config.vm.synced_folder "~/projects/node/app", "/home/vagrant/docker/dnmp/node/app"
 
   # Provider-specific configuration so you can fine-tune various
@@ -73,6 +73,6 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
       sudo systemctl start docker
-      docker start node1
+      docker start node1 phpredisadmin maven
   SHELL
 end
