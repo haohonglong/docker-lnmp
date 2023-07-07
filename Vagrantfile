@@ -33,7 +33,10 @@ Vagrant.configure("2") do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.10"
+  # config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "public_network", ip: "192.168.1.6"
+  # config.vm.network "public_network", bridge: "en1: Wi-Fi (AirPort)"
+
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -56,14 +59,34 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-   config.vm.provider "virtualbox" do |vb|
-      vb.name = "centos7"
+  config.vm.provider "virtualbox" do |v|
+      v.name = "centos7"
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-      vb.memory = "2046"
-   end
+      v.memory = "2046"
+  end
+
+
+  # config.vm.define "web" do |web|
+  #     web.vm.network "private_network", ip: "192.168.33.11"
+
+  #     web.vm.box = "centos/7"
+  #     web.vm.hostname = "centos7-1"
+
+  #     web.vm.provider "virtualbox" do |v|
+  #         v.name = "centos7_1"
+  #         v.memory = "2046"
+  #     end
+
+  #     # web.vm.provision "shell", path: "install_docker.sh"
+
+
+  # end
+
+
+
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -72,6 +95,11 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+      HOST_IP="export HOST_IP=192.168.1.6"
+      if ! grep "$HOST_IP" .bashrc >/dev/null; then
+        echo $HOST_IP >> .bashrc
+      fi
+      
       sudo systemctl start docker
       docker start node1 phpredisadmin maven
   SHELL
