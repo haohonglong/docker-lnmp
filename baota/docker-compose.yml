@@ -1,0 +1,50 @@
+version: "3"
+services:
+  bt:
+    image: pch18/baota
+    container_name: bt
+    hostname: bt
+    restart: always
+    environment:
+      TZ: "$TZ"
+      HOSTIP: $HOST_IP
+    privileged: true
+    shm_size: '1gb'
+    ports:
+      - 445:443
+      - 8088:80
+      - 888:888
+      - 8888:8888
+    working_dir: /www/wwwroot
+    stdin_open: true
+    tty: true
+    networks:
+      - default
+
+  bt2:
+    image: centos:7
+    container_name: bt2
+    hostname: bt2
+    restart: always
+    environment:
+      TZ: "$TZ"
+      HOSTIP: $HOST_IP
+    privileged: true
+    shm_size: '1gb'
+    ports:
+      - 446:443
+      - 8089:80
+      - 889:888
+      - 8889:8888
+    working_dir: /www/wwwroot
+    stdin_open: true
+    tty: true
+    networks:
+      - default
+
+
+
+networks:
+  default:
+    driver: bridge
+
