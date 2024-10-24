@@ -1,0 +1,87 @@
+version: '3'
+services:
+  nvm1:
+    image: haohonglong/nvm:version1.0
+    container_name: nvm1
+    hostname: nvm1
+    environment:
+      TZ: "$TZ"
+      HOSTIP: ${HOST_IP}
+    ports:
+      - 3010:3000
+    volumes:
+      - ${NODE_WWW}:/www/:rw
+      - ./init.sh:/init.sh:rw
+    working_dir: /www
+    extra_hosts:
+      - "yaf.local:$HOST_IP"
+      - "boda.api:$HOST_IP"
+    stdin_open: true
+    tty: true
+    networks:
+      - public
+
+  node1:
+    image: node:14.16.1-alpine
+    container_name: node1
+    hostname: node1
+    environment:
+      TZ: "$TZ"
+      HOSTIP: ${HOST_IP}
+    ports:
+      - 3000:3000
+    volumes:
+      - ${NODE_WWW}:/www/:rw
+    working_dir: /www
+    extra_hosts:
+      - "yaf.local:$HOST_IP"
+      - "boda.api:$HOST_IP"
+    stdin_open: true
+    tty: true
+    networks:
+      - public
+
+  node_build_lam:
+    image: haohonglong/nvm:version1.0
+    container_name: node_build_lam
+    hostname: node_build_lam
+    environment:
+      TZ: "$TZ"
+      HOSTIP: $HOST_IP
+    ports:
+      - 9528:3000
+    volumes:
+      - /www/lamborghiniJS/LAM2-demos:/www/:rw
+      - ./init.sh:/init.sh:rw
+    working_dir: /www/tools/build
+    stdin_open: true
+    tty: true
+    networks:
+      - public
+
+  lam:
+    image: haohonglong/node-http-server:1.0
+    container_name: lam
+    hostname: lam
+    environment:
+      TZ: "$TZ"
+      HOSTIP: $HOST_IP
+    ports:
+      - 9527:9527
+    volumes:
+      - /www/lamborghiniJS/LAM2-demos:/www/:rw
+    working_dir: /www
+    restart: always
+    extra_hosts:
+      - "yaf.local:$HOST_IP"
+      - "boda.api:$HOST_IP"
+    stdin_open: true
+    tty: true
+    networks:
+      - public
+
+
+networks:
+  public:
+    driver: bridge
+    

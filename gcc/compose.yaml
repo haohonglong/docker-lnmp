@@ -1,0 +1,21 @@
+version: "3"
+services:
+  gcc:
+    image: gcc:4.9
+    container_name: gcc
+    hostname: gcc
+    environment:
+      TZ: "$TZ"
+      HOSTIP: $HOST_IP
+    restart: always
+    command: ["bash"]
+    tty: true
+    working_dir: /app
+    networks:
+      - default
+
+
+networks:
+  default:
+    driver: bridge
+

@@ -1,0 +1,24 @@
+version: "3"
+services:
+  golang:
+    image: haohonglong/nvm:version1.0
+    container_name: golang
+    hostname: golang
+    environment:
+      TZ: "$TZ"
+      HOSTIP: $HOST_IP
+    ports:
+      - 8090:8090
+    volumes:
+      - /www/lamborghiniJS/LAM2-demos:/www/:rw
+      - ./init.sh:/init.sh:rw
+    working_dir: /www/tools/build
+    stdin_open: true
+    tty: true
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
+

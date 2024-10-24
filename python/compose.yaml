@@ -1,0 +1,41 @@
+version: "3"
+services:
+  python:
+    image: python:3.11
+    container_name: python
+    hostname: python
+    restart: always
+    environment:
+      TZ: "$TZ"
+      HOSTIP: $HOST_IP
+    ports:
+      - 8001:8000
+    working_dir: /www
+    stdin_open: true
+    tty: true
+    networks:
+      - default
+
+  python3:
+    image: haohonglong/nvm:version1.0
+    container_name: python3
+    hostname: python3
+    environment:
+      TZ: "$TZ"
+      HOSTIP: $HOST_IP
+    ports:
+      - 5000:5000
+      - 8002:8000
+    volumes:
+      - /www/lamborghiniJS/LAM2-demos:/www/:rw
+      - ./init.sh:/init.sh:rw
+    working_dir: /www/tools/build
+    stdin_open: true
+    tty: true
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
+
