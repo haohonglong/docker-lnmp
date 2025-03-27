@@ -3,6 +3,7 @@ services:
   golang:
     image: haohonglong/nvm:version1.0
     container_name: golang
+    restart: always
     hostname: golang
     environment:
       TZ: "$TZ"

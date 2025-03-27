@@ -1,7 +1,7 @@
 version: "3"
 services:
   gcc:
-    image: gcc:4.9
+    image: gcc:11.5.0
     container_name: gcc
     hostname: gcc
     environment:
@@ -11,6 +11,8 @@ services:
     command: ["bash"]
     tty: true
     working_dir: /app
+    volumes:
+      - "/home/vagrant/projects/gcc/exercise_of_c:/app"
     networks:
       - default
 
