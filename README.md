@@ -21,3 +21,15 @@ export PATH=$PATH:/usr/local/nginx/sbin
     CREATE USER 'lam'@'%' IDENTIFIED BY '123456';
     GRANT ALL PRIVILEGES ON *.* TO 'lam'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
     FLUSH   PRIVILEGES;
+
+
+#### No space left on devic have been solved in linux
+    #Remove stopped containers, unused networks, dangling images, and build cache
+    docker system prune -af --volumes
+
+    checking the size of folders of files
+    sudo du -ah -x --max-depth=1
+    
+    du -sh ./*
+
+    df -h
