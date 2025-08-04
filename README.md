@@ -27,7 +27,7 @@ export PATH=$PATH:/usr/local/nginx/sbin
     # Remove stopped containers, unused networks, dangling images, and build cache
     docker system prune -af --volumes
 
-    # checking the size of folders of files
+    # checking the size of folders or files
     sudo du -ah -x --max-depth=1
     
     du -sh ./*
