@@ -23,11 +23,11 @@ export PATH=$PATH:/usr/local/nginx/sbin
     FLUSH   PRIVILEGES;
 
 
-#### No space left on devic have been solved in linux
+#### No space left on devic in linux
     # Remove stopped containers, unused networks, dangling images, and build cache
     docker system prune -af --volumes
 
-    # checking the size of folders or files
+    # Check the size of folders or files
     sudo du -ah -x --max-depth=1
     
     du -sh ./*
