@@ -7,7 +7,7 @@ services:
       - ADMIN_USER=admin
       - ADMIN_PASS=123456
       - REDIS_1_AUTH=123456
-      - REDIS_1_HOST=redis
+      - REDIS_1_HOST=192.168.3.12
       - REDIS_1_PORT=6379
       - TZ=Asia/Shanghai
     restart: always

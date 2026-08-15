@@ -69,6 +69,7 @@ services:
     ports:
       - 9527:9527
     volumes:
+      - /www/lamborghiniJS/LAM2:/LAM2/:ro
       - /www/lamborghiniJS/LAM2-demos:/www/:rw
     working_dir: /www
     restart: always

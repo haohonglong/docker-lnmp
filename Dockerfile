@@ -34,6 +34,13 @@ RUN cd /usr/src \
 #install ruby
 #RUN chmod 755 /ruby.sh
 
+# 设置 SDKMAN 镜像源
+# ENV SDKMAN_API=https://sdkman-mirror.shmilee.io
+# ENV SDKMAN_CANDIDATES_API=https://sdkman-mirror.shmilee.io
+
+# 安装 SDKMAN
+RUN curl -s "https://get.sdkman.io" | bash
+
 
 
 RUN ln -s /usr/local/nginx/html /www

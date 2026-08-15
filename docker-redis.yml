@@ -3,6 +3,7 @@ services:
   redis:
     image: redis:4.0
     container_name: redis
+    hostname: redis
     restart: always
     environment:
       - REDIS_PASS_FILE=/run/secrets/redis-password
@@ -16,12 +17,12 @@ services:
     ]
     volumes:
       - ./data/redis/etc/redis.conf:/usr/local/etc/redis/redis.conf
-      - ./data/redis/data:/data
+      # - ./data/redis/data:/data
       - ./data/redis/etc/redis-password:/run/secrets/redis-password
     networks:
       - public
     ports:
-      - "6397:6379"
+      - "6379:6379"
 
 networks:
   public:

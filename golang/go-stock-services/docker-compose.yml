@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  go-stock-dev:
+    image: golang:1.21-alpine
+    container_name: go-stock-dev
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Shanghai
+      - GOPATH=/go
+      - GOCACHE=/go/.cache
+      - GO111MODULE=on
+      - GOPROXY=https://goproxy.cn,direct
+      - LOG_LEVEL=debug
+    working_dir: /app
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - go-modules:/go/pkg/mod
+      - go-build:/root/.cache/go-build
+    command: ["sh", "-c", "apk add --no-cache tzdata && go run cmd/main.go"]
+    stdin_open: true
+    tty: true
+    extra_hosts:
+      - "yaf.local:host-gateway"
+      - "blog.admin:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  go-modules:
+  go-build:
+

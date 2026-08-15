@@ -54,6 +54,7 @@ Vagrant.configure("2") do |config|
   # config.vm.synced_folder "/Users/long/sites", "/www"
   # config.vm.synced_folder "~/.m2/repository", "/home/vagrant/.m2/repository"
   # config.vm.synced_folder "~/projects", "/home/vagrant/projects"
+  config.vm.synced_folder "~/projects/docker", "/home/vagrant/projects/docker"
   # config.vm.synced_folder "~/projects/mysql", "/home/vagrant/projects/mysql", type: "nfs"
 
   # Provider-specific configuration so you can fine-tune various
@@ -119,11 +120,13 @@ Vagrant.configure("2") do |config|
     web.vm.box_version = "0.01"
     web.vm.hostname = "web"
 
+    # vagrant plugin install vagrant-disksize
+    # web.disksize.size = '45GB'
+
     web.vm.network "private_network", ip: "192.168.3.10"
 
     web.vm.synced_folder "/Users/long/sites", "/www"
     web.vm.synced_folder "~/.m2/repository", "/home/vagrant/.m2/repository"
-    web.vm.synced_folder "~/projects/docker", "/home/vagrant/projects/docker"
     web.vm.synced_folder "~/projects/gcc", "/home/vagrant/projects/gcc"
     web.vm.synced_folder "~/projects/golang", "/home/vagrant/projects/golang"
     web.vm.synced_folder "~/projects/java", "/home/vagrant/projects/java"
@@ -132,7 +135,8 @@ Vagrant.configure("2") do |config|
 
     web.vm.provider "virtualbox" do |v|
         v.name = "web"
-        v.memory = "2046"
+        v.memory = 1024
+        v.cpus = 2
     end
 
 
@@ -141,6 +145,8 @@ Vagrant.configure("2") do |config|
         if ! grep "$HOST_IP" .bashrc >/dev/null; then
           echo $HOST_IP >> .bashrc
         fi
+
+        docker restart nginx php lam
         
     SHELL
 
@@ -162,6 +168,8 @@ Vagrant.configure("2") do |config|
     # # 使用正确的 SSH 配置参数
     # db.ssh.connect_timeout = 300  # 连接超时时间（秒）
     # db.ssh.max_tries = 10         # 最大尝试次数
+
+
     
 
 
@@ -169,12 +177,13 @@ Vagrant.configure("2") do |config|
     db.vm.network "private_network", ip: "192.168.3.12"
 
     # db.vm.synced_folder "./data", "/vagrant_data", create: true
-    db.vm.synced_folder "~/projects/mysql", "/home/vagrant/projects/mysql"
+    db.vm.synced_folder "~/projects/mysql", "/home/vagrant/projects/mysql"#, type: "virtualbox"
 
-    # db.vm.provider "virtualbox" do |v|
-    #     v.name = "db"
-    #     v.memory = "2046"
-    # end
+    db.vm.provider "virtualbox" do |v|
+        v.name = "db"
+        v.memory = 1024
+        v.cpus = 2
+    end
 
     # db.vm.provision "shell", path: "docker_install_centos.sh"
 
@@ -185,7 +194,7 @@ Vagrant.configure("2") do |config|
           echo $HOST_IP >> .bashrc
         fi
 
-
+        docker restart redis
         
     SHELL
 

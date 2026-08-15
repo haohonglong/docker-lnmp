@@ -8,6 +8,7 @@ services:
     environment:
       TZ: "$TZ"
       HOSTIP: $HOST_IP
+      GOPROXY: "https://goproxy.cn,direct"
     ports:
       - 8090:8090
     volumes:
