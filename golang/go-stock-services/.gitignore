@@ -4,7 +4,7 @@
 *.dll
 *.so
 *.dylib
-go-stock-services
+*stock-services
 
 # Test binary, built with `go test -c`
 *.test
@@ -20,7 +20,8 @@ go.work
 go.work.sum
 
 # Environment variables
-
+.env
+.env.local
 
 # IDE files
 .vscode/
