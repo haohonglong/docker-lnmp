@@ -20,7 +20,7 @@ services:
       - .:/app
       - go-modules:/go/pkg/mod
       - go-build:/root/.cache/go-build
-    command: ["sh", "-c", "apk add --no-cache tzdata && go run cmd/main.go"]
+    command: ["sh", "-c", "apk add --no-cache tzdata build-base make && go run cmd/main.go"]
     stdin_open: true
     tty: true
     extra_hosts:
