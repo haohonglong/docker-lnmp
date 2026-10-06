@@ -42,7 +42,10 @@ make up
 ```bash
 # 进入容器
 make exec
-
+# 重新编译
+docker exec go-stock-dev sh -c "cd /app && go build ./... && echo BUILD_OK" 2>&1 | tail -20
+# 编译 + 重启服务（最常用：改完代码 → 编译 → 容器重启自动 reload）
+docker exec go-stock-dev sh -c "cd /app && go build ./... && echo BUILD_OK" && docker restart go-stock-dev
 # 或者
 docker exec -it go-stock-dev sh
 ```

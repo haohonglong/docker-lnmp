@@ -18,6 +18,7 @@ help:
 	@echo "  clean      - 清理编译文件"
 	@echo "  lint       - 代码检查"
 	@echo "  migrate    - 数据库迁移"
+	@echo "  docker-img  - 查看镜像"
 	@echo "  docker-up  - 启动开发容器"
 	@echo "  docker-down - 停止开发容器"
 	@echo "  docker-logs - 查看容器日志"
@@ -66,6 +67,9 @@ fmt:
 	go fmt ./...
 
 # Docker 相关命令
+docker-img:
+	docker images
+	
 docker-up:
 	docker-compose -f docker-compose.dev.yml up -d
 
