@@ -4,7 +4,7 @@
 *.dll
 *.so
 *.dylib
-go-stock-services/go-stock-services
+go-stock-services
 
 # Test binary, built with `go test -c`
 *.test
